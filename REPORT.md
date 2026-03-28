@@ -35,3 +35,39 @@ Flutter web client accessible at /flutter, protected by NANOBOT_ACCESS_KEY.
 Agent answers questions using real LMS data via MCP tools.
 
 ![Task 2B screenshot](report-assets/task2b.png)
+
+## Task 3A — Structured logging
+
+### Happy-path log excerpt
+```
+request_started → auth_success → db_query (INFO) → request_completed (200)
+trace_id=305c90833e99c6aae1ebe1e802523fcb
+```
+
+### Error-path log excerpt
+```
+request_started → auth_success → db_query (INFO) → db_query (ERROR) → items_list_failed_as_not_found → request_completed (404)
+trace_id=6566cfd8d142cc017985ad4aea24f566
+```
+
+## Task 3A — Structured logging
+
+### Happy-path log excerpt
+```
+request_started → auth_success → db_query (INFO) → request_completed (200)
+trace_id=305c90833e99c6aae1ebe1e802523fcb
+```
+
+### Error-path log excerpt
+```
+request_started → auth_success → db_query (INFO) → db_query (ERROR) → items_list_failed_as_not_found → request_completed (404)
+trace_id=6566cfd8d142cc017985ad4aea24f566
+```
+
+## Task 3C — Observability MCP tools
+
+### Normal conditions (no errors)
+"Good news! There have been no errors reported by the Learning Management Service in the last 10 minutes."
+
+### After stopping PostgreSQL
+"I can confirm there have been 2 errors in the Learning Management Service in the last 10 minutes. Both errors show: [Errno -2] Name or service not known. This indicates the LMS service is having trouble connecting to its database."
