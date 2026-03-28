@@ -38,6 +38,8 @@ Agent answers questions using real LMS data via MCP tools.
 
 ## Task 3A — Structured logging
 
+![VictoriaLogs query result](report-assets/task3a.png)
+
 ### Happy-path log excerpt
 ```
 request_started → auth_success → db_query (INFO) → request_completed (200)
@@ -51,6 +53,8 @@ trace_id=6566cfd8d142cc017985ad4aea24f566
 ```
 
 ## Task 3A — Structured logging
+
+![VictoriaLogs query result](report-assets/task3a.png)
 
 ### Happy-path log excerpt
 ```
