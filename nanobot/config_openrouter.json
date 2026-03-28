@@ -1,0 +1,19 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "./workspace",
+      "model": "openai/gpt-3.5-turbo",
+      "provider": "openrouter",
+      "maxTokens": 4096
+    }
+  },
+  "providers": {
+    "openrouter": {
+      "apiKey": "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",
+      "apiBase": "https://openrouter.ai/api/v1"
+    }
+  },
+  "tools": {
+    "mcpServers": {}
+  }
+}

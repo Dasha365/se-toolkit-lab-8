@@ -1,0 +1,19 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "./workspace",
+      "model": "coder-model",
+      "provider": "custom",
+      "maxTokens": 4096
+    }
+  },
+  "providers": {
+    "custom": {
+      "apiKey": "dummy",
+      "apiBase": "http://localhost:42005/v1"
+    }
+  },
+  "tools": {
+    "mcpServers": {}
+  }
+}
