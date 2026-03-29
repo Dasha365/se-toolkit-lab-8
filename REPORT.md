@@ -21,3 +21,17 @@ Agent chained lms_labs + lms_completion_rate for each lab. Lab 08 has 0% (no sub
 
 ### Show me the scores (without specifying a lab)
 Agent called lms_labs first, then asked which lab to show scores for, presenting all 8 labs as a numbered list.
+
+## Task 2A — Deployed agent
+
+Nanobot gateway started successfully on port 18790.
+Logs show: "Starting nanobot gateway version 0.1.4.post5"
+MCP LMS server connected.
+No channels enabled yet (webchat added in Part B).
+
+## Task 2B — Web client
+
+Flutter web client accessible at /flutter, protected by NANOBOT_ACCESS_KEY.
+Agent answers questions using real LMS data via MCP tools.
+
+![Task 2B screenshot](report-assets/task2b.png)
