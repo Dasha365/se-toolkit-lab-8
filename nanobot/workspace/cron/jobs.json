@@ -1,4 +1,59 @@
 {
   "version": 1,
-  "jobs": []
+  "jobs": [
+    {
+      "id": "791f2c8b",
+      "name": "LMS Health Check",
+      "enabled": true,
+      "schedule": {
+        "kind": "every",
+        "atMs": null,
+        "everyMs": 120000,
+        "expr": null,
+        "tz": null
+      },
+      "payload": {
+        "kind": "agent_turn",
+        "message": "LMS Health Check",
+        "deliver": true,
+        "channel": "webchat",
+        "to": "e6633d13-bac6-4fc1-9712-c5f0b38e01ed"
+      },
+      "state": {
+        "nextRunAtMs": 1774770004900,
+        "lastRunAtMs": 1774769877070,
+        "lastStatus": "ok",
+        "lastError": null,
+        "runHistory": [
+          {
+            "runAtMs": 1774769494606,
+            "status": "ok",
+            "durationMs": 7208,
+            "error": null
+          },
+          {
+            "runAtMs": 1774769621817,
+            "status": "ok",
+            "durationMs": 6623,
+            "error": null
+          },
+          {
+            "runAtMs": 1774769748442,
+            "status": "ok",
+            "durationMs": 8626,
+            "error": null
+          },
+          {
+            "runAtMs": 1774769877070,
+            "status": "ok",
+            "durationMs": 7830,
+            "error": null
+          }
+        ]
+      },
+      "createdAtMs": 1774769374604,
+      "updatedAtMs": 1774769884900,
+      "deleteAfterRun": false
+    }
+  ]
 }

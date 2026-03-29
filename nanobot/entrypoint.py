@@ -24,6 +24,16 @@ config["tools"]["mcpServers"]["lms"]["command"] = python_bin
 config["tools"]["mcpServers"]["lms"]["env"]["NANOBOT_LMS_BACKEND_URL"] = os.environ.get("NANOBOT_LMS_BACKEND_URL", "")
 config["tools"]["mcpServers"]["lms"]["env"]["NANOBOT_LMS_API_KEY"] = os.environ.get("NANOBOT_LMS_API_KEY", "")
 
+# MCP Observability
+config["tools"]["mcpServers"]["obs"] = {
+    "command": python_bin,
+    "args": ["-m", "mcp_obs"],
+    "env": {
+        "NANOBOT_VICTORIALOGS_URL": os.environ.get("NANOBOT_VICTORIALOGS_URL", ""),
+        "NANOBOT_VICTORIATRACES_URL": os.environ.get("NANOBOT_VICTORIATRACES_URL", "")
+    }
+}
+
 # Webchat channel
 webchat_host = os.environ.get("NANOBOT_WEBCHAT_CONTAINER_ADDRESS", "0.0.0.0")
 webchat_port = int(os.environ.get("NANOBOT_WEBCHAT_CONTAINER_PORT", "8765"))
