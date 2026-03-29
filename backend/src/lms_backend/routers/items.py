@@ -1,11 +1,8 @@
 """Router for item endpoints — reference implementation."""
-
 import logging
-
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlmodel.ext.asyncio.session import AsyncSession
-
 from lms_backend.database import get_session
 from lms_backend.db.items import create_item, read_item, read_items, update_item
 from lms_backend.models.item import ItemCreate, ItemRecord, ItemUpdate
@@ -13,22 +10,29 @@ from lms_backend.models.item import ItemCreate, ItemRecord, ItemUpdate
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-
 @router.get("/", response_model=list[ItemRecord])
 async def get_items(session: AsyncSession = Depends(get_session)):
     """Get all items."""
     try:
         return await read_items(session)
-    except Exception as exc:
-        logger.warning(
-            "items_list_failed_as_not_found",
-            extra={"event": "items_list_failed_as_not_found"},
+    except SQLAlchemyError as exc:
+        logger.error(
+            "items_list_failed_db_error",
+            extra={"event": "items_list_failed_db_error", "error": str(exc)},
         )
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Items not found",
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Database error: {exc}",
         ) from exc
-
+    except Exception as exc:
+        logger.error(
+            "items_list_failed_unexpected",
+            extra={"event": "items_list_failed_unexpected", "error": str(exc)},
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Unexpected error: {exc}",
+        ) from exc
 
 @router.get("/{item_id}", response_model=ItemRecord)
 async def get_item(item_id: int, session: AsyncSession = Depends(get_session)):
@@ -39,7 +43,6 @@ async def get_item(item_id: int, session: AsyncSession = Depends(get_session)):
             status_code=status.HTTP_404_NOT_FOUND, detail="Item not found"
         )
     return item
-
 
 @router.post("/", response_model=ItemRecord, status_code=201)
 async def post_item(body: ItemCreate, session: AsyncSession = Depends(get_session)):
@@ -57,7 +60,6 @@ async def post_item(body: ItemCreate, session: AsyncSession = Depends(get_sessio
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="parent_id does not reference an existing item",
         )
-
 
 @router.put("/{item_id}", response_model=ItemRecord)
 async def put_item(
